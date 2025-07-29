@@ -17,6 +17,11 @@ namespace MyEmployeeApp.Api.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Adds a new employee to the system (PostgreSQL and Elasticsearch).
+        /// </summary>
+        /// <param name="dto">Employee data.</param>
+        /// <returns>Success or error response.</returns>
         [HttpPost]
         public async Task<IActionResult> AddEmployee([FromBody] EmployeeDto dto)
         {
@@ -34,6 +39,11 @@ namespace MyEmployeeApp.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Searches employees using Elasticsearch.
+        /// </summary>
+        /// <param name="dto">Search filters like name, age, salary.</param>
+        /// <returns>List of matching employees.</returns>
         [HttpPost("search")]
         public async Task<IActionResult> Search([FromBody] EmployeeSearchDto dto)
         {
@@ -48,7 +58,13 @@ namespace MyEmployeeApp.Api.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Partially updates an existing employee.
+        /// Only non-null fields in the request body will be updated.
+        /// </summary>
+        /// <param name="id">Employee ID.</param>
+        /// <param name="dto">Fields to update.</param>
+        /// <returns>Success or not found response.</returns>
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(Guid id, [FromBody] EmployeeUpdateDto dto)
         {
@@ -69,6 +85,11 @@ namespace MyEmployeeApp.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes an employee from PostgreSQL and Elasticsearch.
+        /// </summary>
+        /// <param name="id">Employee ID.</param>
+        /// <returns>Success or not found response.</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

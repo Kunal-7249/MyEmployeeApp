@@ -40,8 +40,49 @@ namespace MyEmployeeApp.Service.Services
 
         public async Task<IEnumerable<Employee>> SearchEmployeesAsync(EmployeeSearchDto dto)
         {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(nameof(dto), "Search criteria cannot be null.");
+            }
+
+            bool isValidName = !string.IsNullOrWhiteSpace(dto.Name) && !IsOnlySymbols(dto.Name);
+
+            bool isValidAgeComparison = string.IsNullOrWhiteSpace(dto.AgeComparison) ||
+                                        IsValidComparisonOperator(dto.AgeComparison);
+
+            bool isValidSalaryComparison = string.IsNullOrWhiteSpace(dto.SalaryComparison) ||
+                                           IsValidComparisonOperator(dto.SalaryComparison);
+
+            if (!isValidAgeComparison)
+                throw new ArgumentException("Invalid AgeComparison operator. Allowed: <, >, =, <=, >=");
+
+            if (!isValidSalaryComparison)
+                throw new ArgumentException("Invalid SalaryComparison operator. Allowed: <, >, =, <=, >=");
+
+            bool hasValidCriteria =
+                isValidName ||
+                dto.Age.HasValue ||
+                dto.Salary.HasValue;
+
+            if (!hasValidCriteria)
+            {
+                throw new ArgumentException("At least one valid search criterion must be provided.");
+            }
+
             return await _employeeSearchRepository.SearchAsync(dto);
         }
+
+        private bool IsOnlySymbols(string input)
+        {
+            return input.All(c => !char.IsLetterOrDigit(c));
+        }
+
+        private bool IsValidComparisonOperator(string input)
+        {
+            return input is "<" or ">" or "=" or "<=" or ">=";
+        }
+
+
 
 
         public async Task<bool> PartialUpdateAsync(Guid id, EmployeeUpdateDto dto)

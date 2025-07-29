@@ -22,6 +22,7 @@ namespace MyEmployeeApp.Infrastructure.Elastic.QueryBuilders
             {
                 var comparison = dto.AgeComparison ?? "=";
                 var birthdate = DateTime.Now.AddYears(-dto.Age.Value);
+
                 switch (comparison)
                 {
                     case ">":
@@ -30,6 +31,13 @@ namespace MyEmployeeApp.Infrastructure.Elastic.QueryBuilders
                     case "<":
                         query &= q.DateRange(r => r.Field(f => f.BirthDate).GreaterThan(birthdate));
                         break;
+                    case ">=":
+                        query &= q.DateRange(r => r.Field(f => f.BirthDate).LessThanOrEquals(birthdate));
+                        break;
+                    case "<=":
+                        query &= q.DateRange(r => r.Field(f => f.BirthDate).GreaterThanOrEquals(birthdate));
+                        break;
+                    case "=":
                     default:
                         query &= q.DateRange(r => r
                             .Field(f => f.BirthDate)

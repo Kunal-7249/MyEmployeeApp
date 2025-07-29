@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyEmployeeApp.Api</name>
+    </assembly>
+    <members>
+        <member name="M:MyEmployeeApp.Api.Controllers.EmployeeController.AddEmployee(MyEmployeeApp.Domain.DTOs.EmployeeDto)">
+            <summary>
+            Adds a new employee to the system (PostgreSQL and Elasticsearch).
+            </summary>
+            <param name="dto">Employee data.</param>
+            <returns>Success or error response.</returns>
+        </member>
+        <member name="M:MyEmployeeApp.Api.Controllers.EmployeeController.Search(MyEmployeeApp.Domain.DTOs.EmployeeSearchDto)">
+            <summary>
+            Searches employees using Elasticsearch.
+            </summary>
+            <param name="dto">Search filters like name, age, salary.</param>
+            <returns>List of matching employees.</returns>
+        </member>
+        <member name="M:MyEmployeeApp.Api.Controllers.EmployeeController.Patch(System.Guid,MyEmployeeApp.Domain.DTOs.EmployeeUpdateDto)">
+            <summary>
+            Partially updates an existing employee.
+            Only non-null fields in the request body will be updated.
+            </summary>
+            <param name="id">Employee ID.</param>
+            <param name="dto">Fields to update.</param>
+            <returns>Success or not found response.</returns>
+        </member>
+        <member name="M:MyEmployeeApp.Api.Controllers.EmployeeController.Delete(System.Guid)">
+            <summary>
+            Deletes an employee from PostgreSQL and Elasticsearch.
+            </summary>
+            <param name="id">Employee ID.</param>
+            <returns>Success or not found response.</returns>
+        </member>
+    </members>
+</doc>

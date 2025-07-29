@@ -10,7 +10,7 @@
     <PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
-		<DocumentationFile>MyEmployeeApp.Api.xml</DocumentationFile>
+		<DocumentationFile></DocumentationFile>
 		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
 		<!-- Optional: hides missing XML comment warnings -->
 	</PropertyGroup>
