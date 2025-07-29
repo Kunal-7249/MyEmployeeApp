@@ -11,7 +11,7 @@ namespace MyEmployeeApp.Service.ServiceInterfaces
     public interface IEmployeeService
     {
         Task AddEmployeeAsync(EmployeeDto dto);
-        Task<IEnumerable<Employee>> SearchEmployeesAsync(string query);
+        Task<IEnumerable<Employee>> SearchEmployeesAsync(EmployeeSearchDto dto);
         //Task<bool> UpdateEmployeeAsync(Guid id, EmployeeDto dto);
         Task<bool> DeleteEmployeeAsync(Guid id);
         Task<bool> PartialUpdateAsync(Guid id, EmployeeUpdateDto dto);

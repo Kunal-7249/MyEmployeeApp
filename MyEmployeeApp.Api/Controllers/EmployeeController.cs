@@ -34,19 +34,20 @@ namespace MyEmployeeApp.Api.Controllers
             }
         }
 
-        [HttpGet("search")]
-        public async Task<IActionResult> Search([FromQuery] string query)
+        [HttpPost("search")]
+        public async Task<IActionResult> Search([FromBody] EmployeeSearchDto dto)
         {
             try
             {
-                var results = await _service.SearchEmployeesAsync(query);
+                var results = await _service.SearchEmployeesAsync(dto);
                 return Ok(results);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Search error: {ex.Message}");
+                return StatusCode(500, $"Search failed: {ex.Message}");
             }
         }
+
 
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(Guid id, [FromBody] EmployeeUpdateDto dto)

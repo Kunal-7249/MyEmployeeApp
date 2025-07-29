@@ -38,13 +38,11 @@ namespace MyEmployeeApp.Service.Services
             await _repository.AddAsync(employee);
         }
 
-        public async Task<IEnumerable<Employee>> SearchEmployeesAsync(string query)
+        public async Task<IEnumerable<Employee>> SearchEmployeesAsync(EmployeeSearchDto dto)
         {
-            if (string.IsNullOrWhiteSpace(query))
-                throw new ArgumentException("Search query cannot be empty.");
-
-            return await _employeeSearchRepository.SearchAsync(query);
+            return await _employeeSearchRepository.SearchAsync(dto);
         }
+
 
         public async Task<bool> PartialUpdateAsync(Guid id, EmployeeUpdateDto dto)
         {

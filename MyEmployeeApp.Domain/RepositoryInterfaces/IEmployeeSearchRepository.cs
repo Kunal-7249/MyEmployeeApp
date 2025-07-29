@@ -1,4 +1,5 @@
-﻿using MyEmployeeApp.Domain.Entities;
+﻿using MyEmployeeApp.Domain.DTOs;
+using MyEmployeeApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace MyEmployeeApp.Domain.RepositoryInterfaces
 
     public interface IEmployeeSearchRepository
     {
-        Task<IEnumerable<Employee>> SearchAsync(string query);
+        Task<IEnumerable<Employee>> SearchAsync(EmployeeSearchDto dto);
     }
 }
